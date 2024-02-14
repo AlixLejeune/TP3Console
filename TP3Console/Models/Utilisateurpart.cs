@@ -10,7 +10,7 @@ namespace TP3Console.Models
     {
         public override string ToString()
         {
-            return Login;
+            return Login + ": " + Email;
         }
     }
 }
