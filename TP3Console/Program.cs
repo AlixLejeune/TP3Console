@@ -4,6 +4,7 @@ using System.Linq;
 using TP3Console.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 
 namespace TP3Console
 {
@@ -83,11 +84,14 @@ namespace TP3Console
                 }
             }*/
             #endregion
+            var ctx = new FilmsDBContext();
+            Exo3Q3();
 
-            Exo2Q9();
-            Console.ReadLine();
+            Console.WriteLine();
+
         }
 
+        #region Exo2
         //affiche tous les films
         public static void Exo2Q1()
         {
@@ -123,7 +127,7 @@ namespace TP3Console
             }
         }
 
-        //affiche "Id : Login" pour tous les films d'action
+        //affiche "Id : titre" pour tous les films d'action
         public static void Exo2Q4()
         {
             var ctx = new FilmsDBContext();
@@ -188,6 +192,49 @@ namespace TP3Console
                           select avis.UtilisateurNavigation;
             Console.WriteLine(usr.First());
         }
+        #endregion
+
+        #region Exo3
+
+        public static int AddUser(string mail, string login, string password)
+        {
+            Utilisateur usr = new Utilisateur()
+            { Login = login,
+                Email = mail,
+                Pwd = HashCode.Combine(password).ToString()
+            };
+            FilmsDBContext ctx = new FilmsDBContext();
+            ctx.Utilisateurs.Add(usr);
+            return ctx.SaveChanges();
+        }
+
+        public static void Exo3Q1()
+        {
+            int nb = AddUser("me@gmail.com", "Me", "pwd");
+            Console.WriteLine("Nombre de lignes ajoutées : " + nb);
+        }
+
+        public static void Exo3Q2()
+        {
+            var ctx = new FilmsDBContext();
+            ctx.Films.First(x => x.Nom == "L'armee des douze singes").Description = "*Monkey noises*";
+            ctx.Films.First(x => x.Nom == "L'armee des douze singes").Categorie = ctx.Categories.First(x => x.Nom == "Drame").Id;
+
+            int nb = ctx.SaveChanges();
+            Console.WriteLine("Lignes modifiées : " + nb);
+        }
+
+        public static void Exo3Q3()
+        {
+            var ctx = new FilmsDBContext();
+            ctx.Avis.RemoveRange(ctx.Avis.Where(x => x.FilmNavigation.Nom == "L'armee des douze singes"));
+            ctx.Films.Remove(ctx.Films.FirstOrDefault(x =>  x.Nom == "L'armee des douze singes"));
+
+            int nb = ctx.SaveChanges();
+            Console.WriteLine("Lignes suppr : " + nb);
+        }
+
+        #endregion
 
     }
 }
