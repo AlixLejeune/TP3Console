@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace TP3Console.Models
 {
-    internal partial class CategoriePart
+    public partial class Categorie
     {
+        public override string ToString()
+        {
+            return Nom;
+        }
     }
 }

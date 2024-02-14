@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace TP3Console.Models
 {
-    internal partial class FilmPart
+    public partial class Film
     {
+        public override string ToString()
+        {
+            return Nom;
+        }
     }
 }

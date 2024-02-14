@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
 
-namespace TP3Console.Models.EntityFramework
+namespace TP3Console.Models
 {
     public partial class FilmsDBContext : DbContext
     {

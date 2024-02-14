@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace TP3Console.Models
 {
-    internal partial class AviPart
+    public partial class Avi
     {
+        public override string ToString()
+        {
+            return Avis;
+        }
     }
 }

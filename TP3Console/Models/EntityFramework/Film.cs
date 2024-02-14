@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TP3Console.Models.EntityFramework
+namespace TP3Console.Models
 {
     [Table("film")]
     public partial class Film

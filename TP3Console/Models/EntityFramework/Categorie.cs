@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace TP3Console.Models.EntityFramework
+namespace TP3Console.Models
 {
     [Table("categorie")]
     public partial class Categorie
