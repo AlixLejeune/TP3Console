@@ -85,7 +85,7 @@ namespace TP3Console
             }*/
             #endregion
             var ctx = new FilmsDBContext();
-            Exo3Q3();
+            Exo3Q5();
 
             Console.WriteLine();
 
@@ -210,7 +210,7 @@ namespace TP3Console
 
         public static void Exo3Q1()
         {
-            int nb = AddUser("me@gmail.com", "Me", "pwd");
+            int nb = AddUser("JMLP@fn.fr", "Jean-marie Le Pen", "pwd");
             Console.WriteLine("Nombre de lignes ajoutées : " + nb);
         }
 
@@ -234,7 +234,29 @@ namespace TP3Console
             Console.WriteLine("Lignes suppr : " + nb);
         }
 
+        public static void Exo3Q4()
+        {
+            var ctx = new FilmsDBContext();
+            AddUser("JMLP@fn.fr", "Jean-marie Le Pen", "pwd");
+            ctx.Avis.Add(new Avi() { Utilisateur = 1, Film = 45});
+            ctx.SaveChanges();
+            Avi avis = ctx.Avis.First(x => x.Film == 45 && x.Utilisateur == 1);
+            avis.Avis = "Jeanne ! Oskour !";
+            avis.Note = (decimal)10;
+
+            int nb = ctx.SaveChanges();
+            Console.WriteLine("Lignes suppr : " + nb);
+        }
+
+        public static void Exo3Q5()
+        {
+            var ctx = new FilmsDBContext();
+            ctx.Films.AddRange(new List<Film>() { new Film() { Categorie = 5, Nom = "Your Name" }, new Film() { Categorie = 5, Nom = "A Silent Voice" } });
+            ctx.SaveChanges();
+        }
+
         #endregion
+
 
     }
 }
